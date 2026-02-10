@@ -54,19 +54,20 @@ function createHighlightTexture() {
 
 function init3D() {
     const audio = document.getElementById("backgroundMusic");
+    let audioUnlocked = false;
+
+function unlockAudio() {
+    if (!audio || audioUnlocked) return;
+
     audio.currentTime = 25;
-    document.body.addEventListener(
-        "click",
-        () => {
-            if (audio.paused)
-                audio
-                    .play()
-                    .catch((e) =>
-                        console.log("Reproducción automática bloqueada."),
-                    );
-        },
-        { once: true },
-    );
+    audio.play().then(() => {
+        audioUnlocked = true;
+    }).catch(() => {});
+}
+
+["click", "touchstart"].forEach(evt => {
+    document.body.addEventListener(evt, unlockAudio, { once: true });
+});
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -275,7 +276,7 @@ function init3D() {
                 textContent.scrollTop = textContent.scrollHeight;
             }
 
-            timer = setTimeout(typeWriter, 100);
+            timer = setTimeout(typeWriter, 80);
         } else {
             document.querySelector(".signature").style.opacity = "1";
             isTypingCompleted = true;
