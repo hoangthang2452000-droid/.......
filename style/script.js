@@ -573,3 +573,4 @@ function unlockAudio() {
     });
     animate();
 }
+
