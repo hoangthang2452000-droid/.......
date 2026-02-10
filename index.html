@@ -65,7 +65,36 @@
   </script>
 
   <script type="module" src="./style/script.js"></script>
+<script>
+const startScreen = document.getElementById("startScreen");
+const audio = document.getElementById("bgm");
+
+startScreen.addEventListener("click", () => {
+  // 🎵 nhạc
+  audio.play().catch(()=>{});
+
+  // ẩn màn hình click
+  startScreen.style.display = "none";
+
+  // 🚀 khởi động app
+  startApp();
+});
+
+// ❌ KHÔNG cho chạy tự động
+// window.onload = startApp;
+
+function startApp() {
+  // ✅ CHỈ để logic ở đây
+  // loading
+  // animation
+  // canvas
+  // setInterval / requestAnimationFrame
+}
+</script>
 </body>
+<div id="startScreen">
+  💖 Chạm để bắt đầu 💖
+</div>
 
 
 </html>
